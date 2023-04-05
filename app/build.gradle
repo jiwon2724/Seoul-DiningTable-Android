@@ -23,8 +23,14 @@ android {
 
         buildConfigField "String", "NAVER_CLIENT_ID", properties['naver_client_id']
         buildConfigField "String", "NAVER_CLIENT_SECRET", properties['naver_client_secret']
+
         buildConfigField "String", "NAVER_LOGIN_CLIENT_ID", properties['naver_login_client_id']
         buildConfigField "String", "NAVER_LOGIN_CLEINT_SECRET", properties['naver_login_client_secret']
+
+        buildConfigField "String", "KAKAO_NATIVE_APP_KEY", properties['kakao_native_app_key']
+
+
+        manifestPlaceholders = ["test" : properties['kakao_native_app_key']]
     }
 
     viewBinding {
@@ -85,4 +91,7 @@ dependencies {
 
     // Naver Login
     implementation 'com.navercorp.nid:oauth:5.5.0'
+
+    // Kakao Login
+    implementation "com.kakao.sdk:v2-user:2.13.0"
 }
