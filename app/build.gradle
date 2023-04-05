@@ -23,6 +23,8 @@ android {
 
         buildConfigField "String", "NAVER_CLIENT_ID", properties['naver_client_id']
         buildConfigField "String", "NAVER_CLIENT_SECRET", properties['naver_client_secret']
+        buildConfigField "String", "NAVER_LOGIN_CLIENT_ID", properties['naver_login_client_id']
+        buildConfigField "String", "NAVER_LOGIN_CLEINT_SECRET", properties['naver_login_client_secret']
     }
 
     viewBinding {
@@ -80,4 +82,7 @@ dependencies {
 
     // Naver Map
     implementation "com.naver.maps:map-sdk:3.16.0"
+
+    // Naver Login
+    implementation 'com.navercorp.nid:oauth:5.5.0'
 }

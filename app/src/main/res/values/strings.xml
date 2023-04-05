@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Seoul-DiningTable</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">서울밥상</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
