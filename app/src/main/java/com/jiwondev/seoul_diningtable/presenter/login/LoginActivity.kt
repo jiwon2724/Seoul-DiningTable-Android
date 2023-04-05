@@ -1,10 +1,7 @@
 package com.jiwondev.seoul_diningtable.presenter.login
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.result.contract.ActivityResultContracts
-import com.jiwondev.seoul_diningtable.R
 import com.jiwondev.seoul_diningtable.databinding.ActivityLoginBinding
 import com.jiwondev.seoul_diningtable.presenter.base.BaseActivity
 import com.kakao.sdk.auth.model.OAuthToken
@@ -13,50 +10,15 @@ import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import com.navercorp.nid.NaverIdLoginSDK
 import com.navercorp.nid.oauth.NidOAuthLogin
+import com.navercorp.nid.oauth.OAuthLoginCallback
 import com.navercorp.nid.profile.NidProfileCallback
 import com.navercorp.nid.profile.data.NidProfileResponse
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.inflate(it)}) {
-    private val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
-        if (error != null) {
-            Log.e("Kakao Failed", "카카오계정으로 로그인 실패", error)
-        } else if (token != null) {
-            Log.i("Kakao Success", "카카오계정으로 로그인 성공 ${token.accessToken}")
-        }
-    }
-
-    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        when (result.resultCode) {
-            RESULT_OK -> {
-                // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
-                Log.d("Naver Success : ", NaverIdLoginSDK.getAccessToken().toString())
-                Log.d("Naver Success : ", NaverIdLoginSDK.getTokenType().toString())
-
-                getNaverUserInfo()
-
-            }
-            RESULT_CANCELED -> {
-                // 실패 or 에러
-
-            }
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setClickListener()
-
-        NaverIdLoginSDK.logout()
-
-        UserApiClient.instance.logout { error ->
-            if (error != null) {
-
-            }
-            else {
-
-            }
-        }
     }
 
     private fun setClickListener() {
@@ -66,14 +28,33 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
 
 
     private fun startNaverLogin() {
-        /**
-         * launcher나 OAuthLoginCallback을 authenticate() 메서드 호출 시 파라미터로 전달하거나 NidOAuthLoginButton 객체에 등록하면 인증이 종료되는 것을 확인할 수 있습니다.
-         */
+        val oauthLoginCallback = object : OAuthLoginCallback {
+            override fun onSuccess() {
+                // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
+                Log.d("Naver Success : ", NaverIdLoginSDK.getAccessToken().toString())
+                Log.d("Naver Success : ", NaverIdLoginSDK.getTokenType().toString())
+                getNaverUserInfo()
 
-        NaverIdLoginSDK.authenticate(this, launcher)
+            }
+            override fun onFailure(httpStatus: Int, message: String) {
+
+            }
+            override fun onError(errorCode: Int, message: String) {
+                onFailure(errorCode, message)
+            }
+        }
+        NaverIdLoginSDK.authenticate(this, oauthLoginCallback)
     }
 
     private fun startKakaoLogin() {
+        val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+            if (error != null) {
+                Log.e("Kakao Failed", "카카오계정으로 로그인 실패", error)
+            } else if (token != null) {
+                Log.i("Kakao Success", "카카오계정으로 로그인 성공 ${token.accessToken}")
+            }
+        }
+
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
             UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
                 if (error != null) {
@@ -110,5 +91,17 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
                 onFailure(errorCode, message)
             }
         })
+    }
+
+    private fun snsLogout() {
+        NaverIdLoginSDK.logout()
+        UserApiClient.instance.logout { error ->
+            if (error != null) {
+
+            }
+            else {
+
+            }
+        }
     }
 }
