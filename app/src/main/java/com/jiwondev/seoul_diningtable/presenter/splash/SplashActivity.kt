@@ -15,7 +15,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>({ActivitySplashBindin
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        moveActivity(LoginActivity::class.java)
+        moveActivity(MapActivity::class.java)
 
     }
 

@@ -30,6 +30,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        init()
     }
 
     private fun init() {
@@ -41,6 +43,10 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 fm.beginTransaction().add(R.id.naverMap, it).commit()
             }
         mapFragment.getMapAsync(this)
+    }
+
+    private fun getPermission() {
+
     }
 
     override fun onMapReady(p0: NaverMap) {
