@@ -15,7 +15,9 @@ import com.jiwondev.seoul_diningtable.databinding.ActivityMapBinding
 import com.jiwondev.seoul_diningtable.presenter.base.BaseActivity
 import com.jiwondev.seoul_diningtable.presenter.common.Constant.Companion.GRANT_REQUEST_CODE
 import com.jiwondev.seoul_diningtable.presenter.common.toast
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MapActivity : BaseActivity<ActivityMapBinding>({ActivityMapBinding.inflate(it)}) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,19 +30,6 @@ class MapActivity : BaseActivity<ActivityMapBinding>({ActivityMapBinding.inflate
         binding.bottomNavigationView.setupWithNavController(host.navController)
     }
 
-    private fun getPermission() {
-        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "권한 승인", Toast.LENGTH_SHORT).show()
-            init()
-        } else {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION),
-                GRANT_REQUEST_CODE
-            )
-        }
-    }
-
     private fun startSettingScreen() {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:${packageName}")) // 설정화면
         with(intent) {
@@ -49,13 +38,38 @@ class MapActivity : BaseActivity<ActivityMapBinding>({ActivityMapBinding.inflate
         startActivity(intent)
     }
 
+    private fun getPermission() {
+        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+            Toast.makeText(this, "권한 승인", Toast.LENGTH_SHORT).show()
+            init()
+        } else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION
+                ),
+                GRANT_REQUEST_CODE
+            )
+        }
+    }
+
+    private fun permissionsGrantResult(grantResults: IntArray) : Boolean {
+        // grantResults : 권한 승인 결과 -> 권한 순서에 따라 대응된다.
+        grantResults.forEach {
+            if(it != PackageManager.PERMISSION_GRANTED) return false
+        }
+        return true
+    }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        // grantResults : 권한 승인 결과 -> 권한에 순서에 따라 대응된다.
         when(requestCode) {
             GRANT_REQUEST_CODE -> {
-                if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if(permissionsGrantResult(grantResults)) {
                     toast("권한이 승인.")
                     init()
                 } else {
