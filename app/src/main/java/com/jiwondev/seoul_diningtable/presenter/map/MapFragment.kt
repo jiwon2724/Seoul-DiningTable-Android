@@ -9,6 +9,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.jiwondev.seoul_diningtable.R
 import com.jiwondev.seoul_diningtable.databinding.FragmentMapBinding
 import com.jiwondev.seoul_diningtable.presenter.base.BaseFragment
@@ -16,10 +22,13 @@ import com.naver.maps.map.*
 import com.naver.maps.map.MapFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collectLatest
 import java.util.*
 
 @AndroidEntryPoint
 class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate), OnMapReadyCallback {
+    private val mapViewModel: MapViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -51,9 +60,21 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         return currentLocation?.let { "${it.latitude},${it.longitude}" }?: "주소없음"
     }
 
+    private fun startFlow() {
+         mapViewModel.test()
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                mapViewModel.flow.collectLatest {
+                    Log.d("mapResult : ", it.toString())
+                }
+            }
+        }
+    }
+
 
     override fun onMapReady(p0: NaverMap) {
         Log.d("result : ", getLatitudeLongitude())
-        // TODO reverse geocoding
+        startFlow()
     }
 }

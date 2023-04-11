@@ -12,6 +12,7 @@ interface MapApi {
     suspend fun getReverseGeocodingResult(
         @Header("X-NCP-APIGW-API-KEY-ID") id: String = BuildConfig.NAVER_CLIENT_ID,
         @Header("X-NCP-APIGW-API-KEY") secret: String = BuildConfig.NAVER_CLIENT_SECRET,
-        @Query("coords") coords: String
+        @Query("coords") coords: String,
+        @Query("output") output: String = "json"
     ) : Response<ReverseGeocodingDto>
 }

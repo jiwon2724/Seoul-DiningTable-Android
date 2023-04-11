@@ -20,6 +20,8 @@ object MapModule {
         return retrofit.create(MapApi::class.java)
     }
 
+    @Singleton
+    @Provides
     fun provideMapRepository(mapApi: MapApi): MapRepository {
         return ReverseGeocodingImpl(mapApi)
     }
