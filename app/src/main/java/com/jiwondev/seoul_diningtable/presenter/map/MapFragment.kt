@@ -2,6 +2,7 @@ package com.jiwondev.seoul_diningtable.presenter.map
 
 import android.annotation.SuppressLint
 import android.content.Context.LOCATION_SERVICE
+import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
@@ -11,8 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.jiwondev.seoul_diningtable.R
@@ -41,6 +40,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         super.onViewCreated(view, savedInstanceState)
 
         init()
+
     }
 
     private fun init() {
@@ -75,6 +75,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun onMapReady(p0: NaverMap) {
         Log.d("result : ", getLatitudeLongitude())
-        startFlow()
+        // startFlow()
     }
 }
