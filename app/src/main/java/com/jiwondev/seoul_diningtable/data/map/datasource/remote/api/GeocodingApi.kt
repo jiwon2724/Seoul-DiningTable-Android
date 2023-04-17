@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
 
-interface MapApi {
+interface GeocodingApi {
     @GET("gc")
     suspend fun getReverseGeocodingResult(
         @Header("X-NCP-APIGW-API-KEY-ID") id: String = BuildConfig.NAVER_CLIENT_ID,

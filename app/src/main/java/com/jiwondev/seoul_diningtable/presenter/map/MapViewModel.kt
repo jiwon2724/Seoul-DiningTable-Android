@@ -10,9 +10,8 @@ import com.jiwondev.seoul_diningtable.presenter.common.Constant.Companion.JOONGU
 import com.jiwondev.seoul_diningtable.presenter.common.Constant.Companion.SUNGDONGU
 import com.jiwondev.seoul_diningtable.presenter.common.Constant.Companion.YONGSANGU
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flatMapConcat
-import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,11 +28,19 @@ class MapViewModel @Inject constructor(
      * 3. 해당 자치구 코드로 base api 호출
      *
      * **/
+
+    // TODO : StateFlow로 만들어야해.
     fun test(coords: String = "126.9779692,37.566535") = viewModelScope.launch {
         geocodingUseCase.convertCoordinate(coords).flatMapConcat {
             val boroughCode = boroughToCode(it.results[0].region.area2.toString())
             storeSearchUseCase.getStoreInfo(boroughCode)
-        }.collect()
+        }.onCompletion {
+
+        }.catch {
+
+        }.collect {
+
+        }
     }
 
     // TODO : 자치구 -> 코드 변환 로직 개선방법 생각해야해.
