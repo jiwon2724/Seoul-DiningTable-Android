@@ -53,6 +53,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     }
 
 
+    // TODO : 프래그먼트에서 권한 확인
     @SuppressLint("MissingPermission")
     private fun getLatitudeLongitude(): String {
         val locationManager = requireActivity().getSystemService(LOCATION_SERVICE) as LocationManager
@@ -66,7 +67,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 mapViewModel.flow.collectLatest {
-                    Log.d("mapResult : ", it.toString())
+                    Log.d("mapResult : ", it.results[0].region.area2.name)
+
                 }
             }
         }
@@ -74,7 +76,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
 
     override fun onMapReady(p0: NaverMap) {
-        Log.d("result : ", getLatitudeLongitude())
-        // startFlow()
+        startFlow()
     }
 }

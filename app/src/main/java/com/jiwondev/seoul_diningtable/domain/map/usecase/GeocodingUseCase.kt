@@ -5,7 +5,7 @@ import com.jiwondev.seoul_diningtable.domain.map.repository.MapRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class MapUseCase @Inject constructor(private val mapRepository: MapRepository) {
+class GeocodingUseCase @Inject constructor(private val mapRepository: MapRepository) {
     suspend fun convertCoordinate(coords: String) : Flow<ReverseGeocodingDto> {
         return mapRepository.getReverseGeocoding(coords)
     }
