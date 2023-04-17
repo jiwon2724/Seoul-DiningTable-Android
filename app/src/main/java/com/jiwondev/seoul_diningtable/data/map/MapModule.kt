@@ -9,6 +9,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module(includes = [NetworkModule::class])
@@ -16,7 +17,7 @@ import javax.inject.Singleton
 object MapModule {
     @Singleton
     @Provides
-    fun provideMapApi(retrofit: Retrofit) : MapApi {
+    fun provideMapApi(@Named("default") retrofit: Retrofit) : MapApi {
         return retrofit.create(MapApi::class.java)
     }
 

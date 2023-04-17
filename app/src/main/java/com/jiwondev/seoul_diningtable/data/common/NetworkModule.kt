@@ -10,6 +10,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -17,6 +18,7 @@ import javax.inject.Singleton
 object NetworkModule {
     @Singleton
     @Provides
+    @Named("test")
     fun provideGeocodingBaseRetrofit() : Retrofit {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -32,7 +34,10 @@ object NetworkModule {
         }.build()
     }
 
-    fun provideDefaultRetorfit() : Retrofit {
+    @Singleton
+    @Provides
+    @Named("default")
+    fun provideDefaultRetrofit() : Retrofit {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
 
@@ -43,7 +48,7 @@ object NetworkModule {
         return Retrofit.Builder().apply {
             addConverterFactory(GsonConverterFactory.create())
             client(client)
-            baseUrl(BuildConfig.)
+            baseUrl(BuildConfig.BASE_URL)
         }.build()
     }
 }
