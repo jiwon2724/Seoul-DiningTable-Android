@@ -1,7 +1,6 @@
 package com.jiwondev.seoul_diningtable.data.map.datasource.remote.api
 
-import com.jiwondev.seoul_diningtable.domain.map.entity.StoreInfoDto
-import com.jiwondev.seoul_diningtable.presenter.common.Constant
+import com.jiwondev.seoul_diningtable.domain.map.entity.store.StoreInfoDto
 import com.jiwondev.seoul_diningtable.presenter.common.Constant.Companion.MART
 import retrofit2.Response
 import retrofit2.http.GET

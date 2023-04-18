@@ -62,13 +62,13 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     }
 
     private fun startFlow() {
-         mapViewModel.test()
+//        mapViewModel.test()
+        mapViewModel.seoulApiTest()
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mapViewModel.flow.collectLatest {
-                    Log.d("mapResult : ", it.results[0].region.area2.name)
-
+                mapViewModel.testFlow.collectLatest {
+                    Log.d("apiResult : ", it.toString())
                 }
             }
         }

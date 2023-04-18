@@ -56,7 +56,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    @Named("store")
+    @Named("product")
     fun provideStoreRetrofit() : Retrofit {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -68,7 +68,7 @@ object NetworkModule {
         return Retrofit.Builder().apply {
             addConverterFactory(GsonConverterFactory.create())
             client(client)
-            baseUrl(BuildConfig.BASE_URL)
+            baseUrl("http://openAPI.seoul.go.kr:8088/${BuildConfig.AUTH_KEY}/json/")
         }.build()
     }
 }

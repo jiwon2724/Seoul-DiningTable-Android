@@ -1,4 +1,4 @@
-package com.jiwondev.seoul_diningtable.domain.map.entity
+package com.jiwondev.seoul_diningtable.domain.map.entity.geocoding
 
 data class Area1(
     val alias: String,

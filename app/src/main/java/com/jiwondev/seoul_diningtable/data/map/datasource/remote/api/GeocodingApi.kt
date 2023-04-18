@@ -1,7 +1,7 @@
 package com.jiwondev.seoul_diningtable.data.map.datasource.remote.api
 
 import com.jiwondev.seoul_diningtable.BuildConfig
-import com.jiwondev.seoul_diningtable.domain.map.entity.ReverseGeocodingDto
+import com.jiwondev.seoul_diningtable.domain.map.entity.geocoding.ReverseGeocodingDto
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header

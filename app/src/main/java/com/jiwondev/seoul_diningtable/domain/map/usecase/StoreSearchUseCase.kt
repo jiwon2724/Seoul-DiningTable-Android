@@ -1,6 +1,6 @@
 package com.jiwondev.seoul_diningtable.domain.map.usecase
 
-import com.jiwondev.seoul_diningtable.domain.map.entity.StoreInfoDto
+import com.jiwondev.seoul_diningtable.domain.map.entity.store.StoreInfoDto
 import com.jiwondev.seoul_diningtable.domain.map.repository.MapRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

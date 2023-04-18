@@ -3,6 +3,7 @@ package com.jiwondev.seoul_diningtable.data.map
 import com.jiwondev.seoul_diningtable.data.common.NetworkModule
 import com.jiwondev.seoul_diningtable.data.map.datasource.remote.api.DefaultApi
 import com.jiwondev.seoul_diningtable.data.map.datasource.remote.api.GeocodingApi
+import com.jiwondev.seoul_diningtable.data.map.datasource.remote.api.SeoulOpenApi
 import com.jiwondev.seoul_diningtable.data.map.repository.ReverseGeocodingImpl
 import com.jiwondev.seoul_diningtable.domain.map.repository.MapRepository
 import dagger.Module
@@ -30,7 +31,17 @@ object MapModule {
 
     @Singleton
     @Provides
-    fun provideMapRepository(mapApi: GeocodingApi, defaultApi: DefaultApi): MapRepository {
-        return ReverseGeocodingImpl(mapApi, defaultApi)
+    fun provideSeoulStoreProductApi(@Named("product") retrofit: Retrofit) : SeoulOpenApi {
+        return retrofit.create(SeoulOpenApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideMapRepository(
+        mapApi: GeocodingApi,
+        defaultApi: DefaultApi,
+        seoulApi: SeoulOpenApi
+    ): MapRepository {
+        return ReverseGeocodingImpl(mapApi, defaultApi, seoulApi)
     }
 }

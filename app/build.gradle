@@ -30,7 +30,8 @@ android {
         buildConfigField "String", "KAKAO_NATIVE_APP_KEY", properties['kakao_native_app_key']
 
         buildConfigField "String", "BASE_URL", properties['base_url']
-        //
+
+        buildConfigField "String", "AUTH_KEY", properties['auth_key']
 
 
         manifestPlaceholders = ["test" : properties['kakao_native_app_key']]
