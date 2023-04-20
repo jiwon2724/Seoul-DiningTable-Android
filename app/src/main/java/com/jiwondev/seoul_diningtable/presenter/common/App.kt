@@ -1,6 +1,7 @@
 package com.jiwondev.seoul_diningtable.presenter.common
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
 import com.jiwondev.seoul_diningtable.BuildConfig
 import com.jiwondev.seoul_diningtable.R
 import com.kakao.sdk.common.KakaoSdk
@@ -14,7 +15,6 @@ class App : Application() {
         super.onCreate()
 
         init()
-
     }
 
     private fun init() {
@@ -26,5 +26,7 @@ class App : Application() {
             resources.getString(R.string.app_name)
         )
         KakaoSdk.init(this, BuildConfig.KAKAO_NATIVE_APP_KEY)
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO) // 다크모드 비활성화
     }
 }
