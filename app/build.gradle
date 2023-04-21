@@ -105,4 +105,9 @@ dependencies {
 
     // Kakao Login
     implementation "com.kakao.sdk:v2-user:2.13.0"
+
+    // Preference Datastore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+//    implementation("gradle.plugin.dev.arunkumar:scabbard-gradle-plugin:0.5.0")
 }

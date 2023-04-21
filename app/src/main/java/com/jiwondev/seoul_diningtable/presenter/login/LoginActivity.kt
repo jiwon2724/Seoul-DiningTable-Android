@@ -2,6 +2,8 @@ package com.jiwondev.seoul_diningtable.presenter.login
 
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
+import com.jiwondev.seoul_diningtable.R
 import com.jiwondev.seoul_diningtable.databinding.ActivityLoginBinding
 import com.jiwondev.seoul_diningtable.presenter.base.BaseActivity
 import com.kakao.sdk.auth.model.OAuthToken
@@ -15,18 +17,16 @@ import com.navercorp.nid.profile.NidProfileCallback
 import com.navercorp.nid.profile.data.NidProfileResponse
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.inflate(it)}) {
+    val loginViewModel: LoginViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setClickListener()
     }
 
-    private fun setClickListener() {
-        binding.naver.setOnClickListener { startNaverLogin() }
-        binding.kakao.setOnClickListener { startKakaoLogin() }
-    }
 
-
+    /** SNS **/
     private fun startNaverLogin() {
         val oauthLoginCallback = object : OAuthLoginCallback {
             override fun onSuccess() {
@@ -42,6 +42,21 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
             }
         }
         NaverIdLoginSDK.authenticate(this, oauthLoginCallback)
+    }
+    private fun getNaverUserInfo() {
+        NidOAuthLogin().callProfileApi(object : NidProfileCallback<NidProfileResponse> {
+            override fun onSuccess(response: NidProfileResponse) {
+                Log.d("getUserInfo : ", response.profile?.id.toString())
+            }
+            override fun onFailure(httpStatus: Int, message: String) {
+                val errorCode = NaverIdLoginSDK.getLastErrorCode().code
+                val errorDescription = NaverIdLoginSDK.getLastErrorDescription()
+
+            }
+            override fun onError(errorCode: Int, message: String) {
+                onFailure(errorCode, message)
+            }
+        })
     }
 
     private fun startKakaoLogin() {
@@ -68,30 +83,35 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
         }
     }
 
-    private fun getNaverUserInfo() {
-        NidOAuthLogin().callProfileApi(object : NidProfileCallback<NidProfileResponse> {
-            override fun onSuccess(response: NidProfileResponse) {
-                Log.d("getUserInfo : ", response.profile?.id.toString())
-            }
-            override fun onFailure(httpStatus: Int, message: String) {
-                val errorCode = NaverIdLoginSDK.getLastErrorCode().code
-                val errorDescription = NaverIdLoginSDK.getLastErrorDescription()
+    /** UI **/
+    private fun setClickListener() {
+        binding.naverImageView.setOnClickListener { startNaverLogin() }
+        binding.kakaoImageView.setOnClickListener { startKakaoLogin() }
 
-            }
-            override fun onError(errorCode: Int, message: String) {
-                onFailure(errorCode, message)
-            }
-        })
+        binding.guestTextView.setOnClickListener {
+            loginViewModel.type = "guest"
+            changeUserTypeUi(loginViewModel.type)
+        }
+
+        binding.ownerTextView.setOnClickListener {
+            loginViewModel.type = "owner"
+            changeUserTypeUi(loginViewModel.type)
+        }
     }
 
-    private fun snsLogout() {
-        NaverIdLoginSDK.logout()
-        UserApiClient.instance.logout { error ->
-            if (error != null) {
-
+    private fun changeUserTypeUi(type: String) {
+        when(type) {
+            "guest" -> {
+                binding.guestTextView.setBackgroundResource(R.drawable.select_state_raduis_8dp_bg)
+                binding.ownerTextView.setBackgroundResource(R.drawable.no_select_state_bg)
+                binding.loginWordTextView.text = resources.getString(R.string.login_screen_sentence_for_guest)
+                binding.loginTypeTextView.text = resources.getString(R.string.login_screen_guest_login)
             }
-            else {
-
+            "owner" -> {
+                binding.guestTextView.setBackgroundResource(R.drawable.no_select_state_bg)
+                binding.ownerTextView.setBackgroundResource(R.drawable.select_state_raduis_8dp_bg)
+                binding.loginWordTextView.text = resources.getString(R.string.login_screen_sentence_for_owner)
+                binding.loginTypeTextView.text = resources.getString(R.string.login_screen_owner_login)
             }
         }
     }

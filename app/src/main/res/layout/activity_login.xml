@@ -85,7 +85,7 @@
     <TextView
         android:textSize="16sp"
         android:textColor="#3A3E44"
-        android:id="@+id/textView4"
+        android:id="@+id/loginWordTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="46dp"
@@ -95,7 +95,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/loginTypeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -104,20 +104,20 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/loginWordTextView" />
 
     <ImageView
-        android:id="@+id/naver"
+        android:id="@+id/naverImageView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="46dp"
         android:background="@drawable/naver_login_bg"
-        app:layout_constraintEnd_toEndOf="@+id/kakao"
-        app:layout_constraintStart_toStartOf="@+id/kakao"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"></ImageView>
+        app:layout_constraintEnd_toEndOf="@+id/kakaoImageView"
+        app:layout_constraintStart_toStartOf="@+id/kakaoImageView"
+        app:layout_constraintTop_toBottomOf="@+id/loginTypeTextView"></ImageView>
 
     <ImageView
-        android:id="@+id/kakao"
+        android:id="@+id/kakaoImageView"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="30dp"
@@ -127,6 +127,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/naver"></ImageView>
+        app:layout_constraintTop_toBottomOf="@+id/naverImageView"></ImageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
