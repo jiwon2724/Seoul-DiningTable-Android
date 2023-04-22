@@ -3,8 +3,12 @@
     <color name="main_bg_color">#EFF9FF</color>
     <color name="main_text_color">#0F3B74</color>
     <color name="stroke_color">#1473B3</color>
+    <color name="main_color_007acc">#007ACC</color>
+    <color name="main_color_0e487">#0E4E87</color>
 
-
+    <color name="gray_scale_9ca0a7">#9CA0A7</color>
+    <color name="gray_scale_3a3e44">#3A3E44</color>
+    <color name="gray_scale_0c0e10">#0C0E10</color>
 
 
 

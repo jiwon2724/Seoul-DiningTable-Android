@@ -12,6 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.jiwondev.seoul_diningtable.databinding.ActivitySplashBinding
 import com.jiwondev.seoul_diningtable.presenter.base.BaseActivity
 import com.jiwondev.seoul_diningtable.presenter.login.LoginActivity
+import com.jiwondev.seoul_diningtable.presenter.signup.SignUpActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -30,7 +31,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>({ActivitySplashBindin
                         true -> {
                             // TODO : 로그인 연동
                         }
-                        false ->  moveActivity(LoginActivity::class.java)
+                        false ->  moveActivity(SignUpActivity::class.java)
                     }
                 }
             }

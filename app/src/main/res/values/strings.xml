@@ -17,8 +17,9 @@
     <string name="register">가입하기</string>
     <string name="owner_auth">사장님 인증</string>
     <string name="store_name">가게명</string>
-    <string name="store_name_hint">자치구와 상호명을 적어주세요</string>
+    <string name="store_name_hint">자치구와 상호명을 적어주세요.</string>
     <string name="store_number">가게 대표번호</string>
+    <string name="store_number_hint">`-`를 제외한 숫자를 입력해주세요.</string>
     <string name="owner_auth_notification">사장님은 해당 가게의 정보를 수정할 수 있기 때믄에\n본인 인증이 필요해요.\n방문인증 후 자동으로 회원가입이 완료됩니다.</string>
     <string name="visit_sentence">적어주신 가게 주소로\n2~3일 내로 방문할 예정입니다.</string>
     <string name="choose_time_sentence">원하시는 방문 시간이 있다면 알려주세요!(복수선택)</string>

@@ -10,5 +10,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>({ActivitySignUpBindin
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // TODO : Intent로 유저 type 받기.
+
     }
 }
