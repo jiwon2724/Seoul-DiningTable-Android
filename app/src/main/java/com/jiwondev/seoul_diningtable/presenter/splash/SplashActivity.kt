@@ -27,7 +27,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>({ActivitySplashBindin
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 splashViewModel.userPreferenceFlow.collectLatest { preference ->
                     when(preference.autoLogin) {
-                        true -> {}
+                        true -> {
+                            // TODO : 로그인 연동
+                        }
                         false ->  moveActivity(LoginActivity::class.java)
                     }
                 }

@@ -41,6 +41,5 @@ class Constant {
         val LAST_LOGIN_SNS = stringPreferencesKey("last_login_sns")
         val LAST_LOGIN_TYPE = stringPreferencesKey("last_login_type")
         val ACCESS_TOKEN = stringPreferencesKey("access_token")
-
     }
 }
