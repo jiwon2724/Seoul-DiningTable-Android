@@ -10,7 +10,17 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>({ActivitySignUpBindin
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // TODO : Intent로 유저 type 받기.
+        init()
+        clickListener()
 
+    }
+
+
+    private fun clickListener() {
+        binding.signupLeftArrowButton.setOnClickListener { finish() }
+    }
+
+    private fun init() {
+        // TODO : Intent로 유저 type 받기.
     }
 }

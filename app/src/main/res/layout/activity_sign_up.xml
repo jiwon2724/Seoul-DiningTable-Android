@@ -8,7 +8,7 @@
     tools:context=".presenter.signup.SignUpActivity">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/signupLeftArrowButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -25,10 +25,10 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/lotte_dream_medium"
         android:text="@string/signup"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintBottom_toBottomOf="@+id/signupLeftArrowButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+        app:layout_constraintTop_toTopOf="@+id/signupLeftArrowButton" />
 
     <TextView
         android:id="@+id/textView3"
@@ -38,8 +38,8 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="25dp"
         android:text="@string/user_info"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"></TextView>
+        app:layout_constraintStart_toStartOf="@+id/signupLeftArrowButton"
+        app:layout_constraintTop_toBottomOf="@+id/signupLeftArrowButton"></TextView>
 
     <View
         android:id="@+id/view"
@@ -120,7 +120,7 @@
             app:layout_constraintTop_toBottomOf="@+id/view2"></TextView>
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/storeNameEditText"
             style="@style/text2"
             android:layout_width="0dp"
             android:layout_height="50dp"
@@ -142,9 +142,10 @@
             android:layout_marginTop="15dp"
             android:text="@string/store_number"
             app:layout_constraintStart_toStartOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/editText"></TextView>
+            app:layout_constraintTop_toBottomOf="@+id/storeNameEditText"></TextView>
 
         <EditText
+            android:id="@+id/storeNumberEditText"
             style="@style/text2"
             android:layout_width="0dp"
             android:layout_height="50dp"

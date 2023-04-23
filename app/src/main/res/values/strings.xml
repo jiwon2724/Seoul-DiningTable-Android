@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">서울밥상</string>
-<!--로그인-->
+    <!--로그인-->
     <string name="guest">손님</string>
     <string name="owner">사장님</string>
     <string name="login_screen_sentence_for_guest">우리동네 저렴한 식재료를 찾고있으세요?</string>
@@ -9,7 +9,7 @@
     <string name="login_screen_owner_login">사장님으로 로그인</string>
 
 
-<!--회원가입-->
+    <!--회원가입-->
     <string name="signup">회원가입</string>
     <string name="user_info">회원정보</string>
     <string name="nickname">닉네임</string>
@@ -20,7 +20,7 @@
     <string name="store_name_hint">자치구와 상호명을 적어주세요.</string>
     <string name="store_number">가게 대표번호</string>
     <string name="store_number_hint">`-`를 제외한 숫자를 입력해주세요.</string>
-    <string name="owner_auth_notification">사장님은 해당 가게의 정보를 수정할 수 있기 때믄에\n본인 인증이 필요해요.\n방문인증 후 자동으로 회원가입이 완료됩니다.</string>
+    <string name="owner_auth_notification">사장님은 해당 가게의 정보를 수정할 수 있기 때문에\n본인 인증이 필요해요.\n방문인증 후 자동으로 회원가입이 완료됩니다.</string>
     <string name="visit_sentence">적어주신 가게 주소로\n2~3일 내로 방문할 예정입니다.</string>
     <string name="choose_time_sentence">원하시는 방문 시간이 있다면 알려주세요!(복수선택)</string>
     <string name="choose_time_all">영업시간 내 언제든</string>

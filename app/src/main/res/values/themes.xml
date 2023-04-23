@@ -25,14 +25,14 @@
     <style name="title1">
         <item name="android:textColor">@color/gray_scale_0c0e10</item>
         <item name="android:textSize">22sp</item>
-        <item name="android:fontFamily">@font/spoqa_han_sans_neo_medium</item>
+        <item name="android:fontFamily">@font/lotte_dream_medium</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="title2">
         <item name="android:textColor">@color/gray_scale_0c0e10</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:fontFamily">@font/spoqa_han_sans_neo_medium</item>
+        <item name="android:fontFamily">@font/lotte_dream_medium</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
@@ -46,7 +46,7 @@
     <style name="text1">
         <item name="android:textColor">@color/gray_scale_0c0e10</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:fontFamily">@font/spoqa_han_sans_neo_regular</item>
+        <item name="android:fontFamily">@font/lotte_dream_light</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
