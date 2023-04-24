@@ -17,7 +17,7 @@ import com.navercorp.nid.profile.NidProfileCallback
 import com.navercorp.nid.profile.data.NidProfileResponse
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.inflate(it)}) {
-    val loginViewModel: LoginViewModel by viewModels()
+    private val loginViewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +43,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
         }
         NaverIdLoginSDK.authenticate(this, oauthLoginCallback)
     }
+
     private fun getNaverUserInfo() {
         NidOAuthLogin().callProfileApi(object : NidProfileCallback<NidProfileResponse> {
             override fun onSuccess(response: NidProfileResponse) {
@@ -51,7 +52,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
             override fun onFailure(httpStatus: Int, message: String) {
                 val errorCode = NaverIdLoginSDK.getLastErrorCode().code
                 val errorDescription = NaverIdLoginSDK.getLastErrorDescription()
-
             }
             override fun onError(errorCode: Int, message: String) {
                 onFailure(errorCode, message)

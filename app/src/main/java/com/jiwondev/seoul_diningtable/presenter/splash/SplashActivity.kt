@@ -31,7 +31,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>({ActivitySplashBindin
                         true -> {
                             // TODO : 로그인 연동
                         }
-                        false ->  moveActivity(SignUpActivity::class.java)
+                        false ->  moveActivity(LoginActivity::class.java)
                     }
                 }
             }

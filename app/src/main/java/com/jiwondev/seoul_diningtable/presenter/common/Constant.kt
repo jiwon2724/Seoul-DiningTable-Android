@@ -9,6 +9,8 @@ class Constant {
 
         // api endpoint
         const val MART = "mart"
+        const val CHECK_USER = "users/insert"
+        const val AUTH = "users/search"
 
         // store code
         const val JONGROGU = 1
