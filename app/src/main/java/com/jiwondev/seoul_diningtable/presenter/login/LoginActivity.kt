@@ -3,6 +3,9 @@ package com.jiwondev.seoul_diningtable.presenter.login
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.jiwondev.seoul_diningtable.R
 import com.jiwondev.seoul_diningtable.databinding.ActivityLoginBinding
 import com.jiwondev.seoul_diningtable.presenter.base.BaseActivity
@@ -16,13 +19,19 @@ import com.navercorp.nid.oauth.NidOAuthLogin
 import com.navercorp.nid.oauth.OAuthLoginCallback
 import com.navercorp.nid.profile.NidProfileCallback
 import com.navercorp.nid.profile.data.NidProfileResponse
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.inflate(it)}) {
+
     private val loginViewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        observe()
         setClickListener()
     }
 
@@ -78,6 +87,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
                 } else if (token != null) {
                     // TODO 로그인 후 로직 실행
                     Log.i("KakaoLoginSuccess", "카카오톡으로 로그인 성공 ${token.accessToken}")
+                    loginViewModel.getValidation(token.accessToken)
                 }
             }
         } else {
@@ -113,6 +123,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
                 binding.ownerTextView.setBackgroundResource(R.drawable.select_state_raduis_8dp_bg)
                 binding.loginWordTextView.text = resources.getString(R.string.login_screen_sentence_for_owner)
                 binding.loginTypeTextView.text = resources.getString(R.string.login_screen_owner_login)
+            }
+        }
+    }
+
+    private fun observe() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                loginViewModel.testFlow.collect {
+                    Log.d("getUser : ", it.toString())
+                }
             }
         }
     }

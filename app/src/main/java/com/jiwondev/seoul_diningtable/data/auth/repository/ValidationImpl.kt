@@ -1,5 +1,6 @@
 package com.jiwondev.seoul_diningtable.data.auth.repository
 
+import android.util.Log
 import com.jiwondev.seoul_diningtable.data.auth.datasource.reomote.AuthApi
 import com.jiwondev.seoul_diningtable.domain.auth.validation.entity.ValidationDto
 import com.jiwondev.seoul_diningtable.domain.auth.validation.repository.ValidationRepository
@@ -10,9 +11,10 @@ import javax.inject.Inject
 class ValidationImpl @Inject constructor(private val authApi: AuthApi) : ValidationRepository {
     override suspend fun getUserValidation(userEmail: String): Flow<ValidationDto> {
         return flow {
+            Log.d("user ::!! : ", userEmail.toString())
             val apiResult = authApi.getUserValidation(userEmail)
 
-            Log.d("ValidationImpl : ", apiResult.toString())
+            // Log.d("ValidationImpl : ", apiResult.toString())
 
             if(apiResult.isSuccessful) {
                 emit(apiResult.body()!!)

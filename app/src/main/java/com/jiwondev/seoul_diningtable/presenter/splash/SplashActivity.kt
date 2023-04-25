@@ -12,6 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.jiwondev.seoul_diningtable.databinding.ActivitySplashBinding
 import com.jiwondev.seoul_diningtable.presenter.base.BaseActivity
 import com.jiwondev.seoul_diningtable.presenter.login.LoginActivity
+import com.jiwondev.seoul_diningtable.presenter.map.MapActivity
 import com.jiwondev.seoul_diningtable.presenter.signup.SignUpActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
