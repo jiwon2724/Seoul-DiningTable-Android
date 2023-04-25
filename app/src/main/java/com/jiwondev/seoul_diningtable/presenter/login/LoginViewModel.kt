@@ -20,7 +20,7 @@ class LoginViewModel @Inject constructor(
 
     var testFlow = flowOf<ValidationDto>()
 
-    fun getValidation(userEmail: String) = viewModelScope.launch {
+    suspend fun getValidation(userEmail: String) = viewModelScope.launch {
         Log.d("userEmail  : ", userEmail.toString())
         testFlow = validationUserCase.getUserValidation(userEmail)
     }

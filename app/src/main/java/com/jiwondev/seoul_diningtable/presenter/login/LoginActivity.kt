@@ -87,7 +87,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
                 } else if (token != null) {
                     // TODO 로그인 후 로직 실행
                     Log.i("KakaoLoginSuccess", "카카오톡으로 로그인 성공 ${token.accessToken}")
-                    loginViewModel.getValidation(token.accessToken)
+                    // loginViewModel.getValidation(token.accessToken)
                 }
             }
         } else {
