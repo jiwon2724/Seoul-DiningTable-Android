@@ -7,6 +7,7 @@
     <string name="login_screen_guest_login">손님으로 로그인</string>
     <string name="login_screen_sentence_for_owner">서울시에서 농수축산물 판매를 하고 계신가요?</string>
     <string name="login_screen_owner_login">사장님으로 로그인</string>
+    <string name="failed_kakao_login">카카오 계정으로 로그인을 실패했습니다.</string>
 
 
     <!--회원가입-->

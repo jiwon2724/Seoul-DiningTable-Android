@@ -8,9 +8,9 @@ class Constant {
         const val GRANT_REQUEST_CODE = 1000 // 권한 승인 코드
 
         // api endpoint
-        const val MART = "mart"
-        const val CHECK_USER = "users/insert"
-        const val AUTH = "users/search"
+        const val GET_MART = "mart"
+        const val POST_LOGIN_AND_SIGN_UP = "users/insert"
+        const val GET_VALIDATION = "users/search"
 
         // store code
         const val JONGROGU = 1

@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import com.jiwondev.seoul_diningtable.R
 import com.jiwondev.seoul_diningtable.databinding.ActivityLoginBinding
 import com.jiwondev.seoul_diningtable.presenter.base.BaseActivity
+import com.jiwondev.seoul_diningtable.presenter.common.toast
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
@@ -26,7 +27,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
     }
 
 
-    /** SNS **/
+    /** Naver **/
     private fun startNaverLogin() {
         val oauthLoginCallback = object : OAuthLoginCallback {
             override fun onSuccess() {
@@ -59,10 +60,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
         })
     }
 
+    /** Kakao **/
     private fun startKakaoLogin() {
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
-                Log.e("Kakao Failed", "카카오계정으로 로그인 실패", error)
+                toast(resources.getString(R.string.failed_kakao_login))
             } else if (token != null) {
                 Log.i("Kakao Success", "카카오계정으로 로그인 성공 ${token.accessToken}")
             }
@@ -98,7 +100,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
             changeUserTypeUi(loginViewModel.type)
         }
     }
-
     private fun changeUserTypeUi(type: String) {
         when(type) {
             "guest" -> {
