@@ -159,7 +159,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
     }
     private fun moveSignUpActivity() {
         val intent = Intent(this, SignUpActivity::class.java)
-        intent.putExtra("type", loginViewModel.type)
+        intent.apply {
+            putExtra("userEmail : ", loginViewModel.userEmail)
+            putExtra("type", loginViewModel.type)
+        }
         startActivity(intent)
     }
 }

@@ -14,11 +14,14 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(private val validationUserCase: ValidationUseCase): ViewModel() {
     var type: String = "guest"
+    var userEmail: String = ""
 
     private val _loginLoginUiState: MutableStateFlow<LoginUiState> = MutableStateFlow(LoginUiState.Init)
     val loginLoginUiState: StateFlow<LoginUiState> = _loginLoginUiState.asStateFlow()
 
     fun getValidation(userEmail: String) {
+        this.userEmail = userEmail
+
         viewModelScope.launch {
             validationUserCase.getUserValidation(userEmail)
                 .onStart { setLoading() }
