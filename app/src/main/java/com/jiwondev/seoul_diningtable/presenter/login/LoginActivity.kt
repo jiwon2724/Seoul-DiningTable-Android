@@ -8,6 +8,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.jiwondev.seoul_diningtable.R
+import com.jiwondev.seoul_diningtable.data.user.model.UserPreference
 import com.jiwondev.seoul_diningtable.databinding.ActivityLoginBinding
 import com.jiwondev.seoul_diningtable.presenter.base.BaseActivity
 import com.jiwondev.seoul_diningtable.presenter.common.toast
@@ -25,6 +26,7 @@ import com.navercorp.nid.oauth.OAuthLoginCallback
 import com.navercorp.nid.profile.NidProfileCallback
 import com.navercorp.nid.profile.data.NidProfileResponse
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectIndexed
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -42,16 +44,21 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
     private fun observe() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                loginViewModel.loginLoginUiState.collect { state ->
-                    when(state) {
-                        is LoginUiState.Init -> Unit
-                        is LoginUiState.IsSuccess -> {
-                            state.successDto.data?.let {
-                                startActivity(Intent(this@LoginActivity, MapActivity::class.java))
-                            } ?: moveSignUpActivity()
+                launch {
+                    loginViewModel.loginLoginUiState.collect { state ->
+                        Log.d("Current State : ", "Init")
+                        when(state) {
+                            is LoginUiState.Init -> Unit
+                            is LoginUiState.IsSuccess -> state.successDto.data?.let { saveUserInfo() } ?: moveSignUpActivity()
+                            is LoginUiState.IsFailed -> {} // TODO : Failed dto 받으면 넣어야해.
+                            is LoginUiState.IsLoading -> handleProgressBar(state.isLoading)
                         }
-                        is LoginUiState.IsFailed -> {} // TODO : Failed dto 받으면 넣어야해.
-                        is LoginUiState.IsLoading -> handleProgressBar(state.isLoading)
+                    }
+                }
+                launch {
+                    loginViewModel.userPreferenceFlow.collect { preference ->
+                        Log.d("preference : ", preference.toString())
+                        if(preference.autoLogin) startActivity(Intent(this@LoginActivity, MapActivity::class.java))
                     }
                 }
             }
@@ -78,9 +85,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
     private fun getNaverUserInfo() {
         NidOAuthLogin().callProfileApi(object : NidProfileCallback<NidProfileResponse> {
             override fun onSuccess(result: NidProfileResponse) {
-                Log.d("getUserInfo : ", result.profile?.id.toString())
                 val userEmail = result.profile?.id ?: ""
-                if(userEmail.isNotEmpty()) loginViewModel.getValidation(userEmail) else toast(resources.getString(R.string.failed_naver_login))
+
+                when(userEmail.isNotEmpty()) {
+                    true -> {
+                        loginViewModel.getValidation(userEmail)
+                        loginViewModel.lastLoginSns = "naver"
+                    }
+                    false -> toast(resources.getString(R.string.failed_naver_login))
+                }
             }
             override fun onFailure(httpStatus: Int, message: String) {
                 toast("$httpStatus : $message")
@@ -97,7 +110,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
             if (error != null) {
                 toast(resources.getString(R.string.failed_kakao_login))
             } else if (token != null) {
-                Log.i("Kakao Success", "카카오계정으로 로그인 성공 ${token.accessToken}")
+                loginViewModel.lastLoginSns = "kakao"
                 loginViewModel.getValidation(token.accessToken)
             }
         }
@@ -108,7 +121,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
                     if (error is ClientError && error.reason == ClientErrorCause.Cancelled) return@loginWithKakaoTalk
                     UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
                 } else if (token != null) {
-                    Log.i("KakaoLoginSuccess", "카카오톡으로 로그인 성공 ${token.accessToken}")
+                    loginViewModel.lastLoginSns = "kakao"
                     loginViewModel.getValidation(token.accessToken)
                 }
             }
@@ -155,7 +168,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
         }
     }
     private fun saveUserInfo() {
-
+        val userPreference = UserPreference(
+            autoLogin = true,
+            userEmail = loginViewModel.userEmail,
+            lastLoginType = loginViewModel.type,
+            lastLoginSns = loginViewModel.lastLoginSns
+        )
+        loginViewModel.updateUserPreference(userPreference)
     }
     private fun moveSignUpActivity() {
         val intent = Intent(this, SignUpActivity::class.java)

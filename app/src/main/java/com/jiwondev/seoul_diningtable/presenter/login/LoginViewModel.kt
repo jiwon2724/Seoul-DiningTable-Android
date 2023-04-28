@@ -3,6 +3,8 @@ package com.jiwondev.seoul_diningtable.presenter.login
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jiwondev.seoul_diningtable.data.user.datasource.local.UserPreferenceRepository
+import com.jiwondev.seoul_diningtable.data.user.model.UserPreference
 import com.jiwondev.seoul_diningtable.domain.auth.validation.entity.ValidationDto
 import com.jiwondev.seoul_diningtable.domain.auth.validation.usecase.ValidationUseCase
 import com.jiwondev.seoul_diningtable.domain.common.BaseResult
@@ -12,12 +14,19 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val validationUserCase: ValidationUseCase): ViewModel() {
+class LoginViewModel @Inject constructor(
+    private val validationUserCase: ValidationUseCase,
+    private val userPreferenceRepository: UserPreferenceRepository
+    ): ViewModel() {
     var type: String = "guest"
     var userEmail: String = ""
+    var lastLoginSns = ""
 
     private val _loginLoginUiState: MutableStateFlow<LoginUiState> = MutableStateFlow(LoginUiState.Init)
     val loginLoginUiState: StateFlow<LoginUiState> = _loginLoginUiState.asStateFlow()
+
+    val userPreferenceFlow: Flow<UserPreference>
+        get() = userPreferenceRepository.userPreferencesFlow
 
     fun getValidation(userEmail: String) {
         this.userEmail = userEmail
@@ -39,6 +48,10 @@ class LoginViewModel @Inject constructor(private val validationUserCase: Validat
                     }
                 }
         }
+    }
+
+    fun updateUserPreference(userPreference: UserPreference) = viewModelScope.launch {
+        userPreferenceRepository.updateUserPreference(userPreference)
     }
 
     private fun setLoading() { _loginLoginUiState.value = LoginUiState.IsLoading(true) }
