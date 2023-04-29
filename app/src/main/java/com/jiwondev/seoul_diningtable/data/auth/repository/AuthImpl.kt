@@ -1,18 +1,18 @@
 package com.jiwondev.seoul_diningtable.data.auth.repository
 
-import android.util.Log
 import com.jiwondev.seoul_diningtable.data.auth.datasource.reomote.AuthApi
-import com.jiwondev.seoul_diningtable.domain.auth.validation.entity.ValidationDto
-import com.jiwondev.seoul_diningtable.domain.auth.validation.repository.ValidationRepository
+import com.jiwondev.seoul_diningtable.domain.auth.entity.register.RegisterDto
+import com.jiwondev.seoul_diningtable.domain.auth.entity.register.RegisterRequest
+import com.jiwondev.seoul_diningtable.domain.auth.entity.validation.ValidationDto
+import com.jiwondev.seoul_diningtable.domain.auth.repository.AuthRepository
 import com.jiwondev.seoul_diningtable.domain.common.BaseResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class ValidationImpl @Inject constructor(private val authApi: AuthApi) : ValidationRepository {
+class AuthImpl @Inject constructor(private val authApi: AuthApi) : AuthRepository {
     override suspend fun getUserValidation(userEmail: String): Flow<BaseResult<ValidationDto>> {
         return flow {
-            Log.d("ValidationImpl : ", authApi.getUserValidation(userEmail).toString())
             val apiResult = authApi.getUserValidation(userEmail)
 
             if(apiResult.isSuccessful) {
@@ -22,5 +22,9 @@ class ValidationImpl @Inject constructor(private val authApi: AuthApi) : Validat
                 emit(BaseResult.Success(apiResult.body() ?: ValidationDto()))
             }
         }
+    }
+
+    override suspend fun postUserRegister(userRequest: RegisterRequest): Flow<BaseResult<RegisterDto>> {
+        TODO("Not yet implemented")
     }
 }

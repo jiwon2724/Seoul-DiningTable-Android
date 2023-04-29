@@ -26,7 +26,6 @@ import com.navercorp.nid.oauth.OAuthLoginCallback
 import com.navercorp.nid.profile.NidProfileCallback
 import com.navercorp.nid.profile.data.NidProfileResponse
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectIndexed
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint

@@ -1,9 +1,9 @@
 package com.jiwondev.seoul_diningtable.data.auth
 
 import com.jiwondev.seoul_diningtable.data.auth.datasource.reomote.AuthApi
-import com.jiwondev.seoul_diningtable.data.auth.repository.ValidationImpl
+import com.jiwondev.seoul_diningtable.data.auth.repository.AuthImpl
 import com.jiwondev.seoul_diningtable.data.common.NetworkModule
-import com.jiwondev.seoul_diningtable.domain.auth.validation.repository.ValidationRepository
+import com.jiwondev.seoul_diningtable.domain.auth.repository.AuthRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,7 +24,7 @@ object AuthModule {
 
     @Singleton
     @Provides
-    fun provideAuthRepository(authApi: AuthApi) : ValidationRepository {
-        return ValidationImpl(authApi)
+    fun provideAuthRepository(authApi: AuthApi) : AuthRepository {
+        return AuthImpl(authApi)
     }
 }

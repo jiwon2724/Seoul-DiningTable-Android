@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jiwondev.seoul_diningtable.data.user.datasource.local.UserPreferenceRepository
 import com.jiwondev.seoul_diningtable.data.user.model.UserPreference
-import com.jiwondev.seoul_diningtable.domain.auth.validation.entity.ValidationDto
-import com.jiwondev.seoul_diningtable.domain.auth.validation.usecase.ValidationUseCase
+import com.jiwondev.seoul_diningtable.domain.auth.entity.validation.ValidationDto
+import com.jiwondev.seoul_diningtable.domain.auth.usecase.ValidationUseCase
 import com.jiwondev.seoul_diningtable.domain.common.BaseResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -32,6 +32,7 @@ class LoginViewModel @Inject constructor(
         this.userEmail = userEmail
 
         viewModelScope.launch {
+            Log.d("call!!! : ", "call")
             validationUserCase.getUserValidation(userEmail)
                 .onStart { setLoading() }
                 .catch { hideLoading() }

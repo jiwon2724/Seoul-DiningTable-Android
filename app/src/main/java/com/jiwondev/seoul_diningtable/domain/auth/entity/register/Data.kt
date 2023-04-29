@@ -1,4 +1,4 @@
-package com.jiwondev.seoul_diningtable.domain.auth.validation.entity
+package com.jiwondev.seoul_diningtable.domain.auth.entity.register
 
 data class Data(
     val createAt: String,

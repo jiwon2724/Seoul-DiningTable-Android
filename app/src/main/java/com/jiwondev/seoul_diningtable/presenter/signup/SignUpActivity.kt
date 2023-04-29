@@ -1,18 +1,19 @@
 package com.jiwondev.seoul_diningtable.presenter.signup
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.jiwondev.seoul_diningtable.R
+import androidx.activity.viewModels
 import com.jiwondev.seoul_diningtable.databinding.ActivitySignUpBinding
 import com.jiwondev.seoul_diningtable.presenter.base.BaseActivity
 
+
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>({ActivitySignUpBinding.inflate(it)}) {
+    val signUpViewModel: SignUpViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         init()
         clickListener()
-
     }
 
 
@@ -21,6 +22,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>({ActivitySignUpBindin
     }
 
     private fun init() {
-        // TODO : Intent로 유저 type 받기.
+        intent.apply {
+            signUpViewModel.type = getStringExtra("type") ?: ""
+            signUpViewModel.userEmail = getStringExtra("userEmail") ?: ""
+        }
     }
 }

@@ -1,6 +1,6 @@
 package com.jiwondev.seoul_diningtable.data.auth.datasource.reomote
 
-import com.jiwondev.seoul_diningtable.domain.auth.validation.entity.ValidationDto
+import com.jiwondev.seoul_diningtable.domain.auth.entity.validation.ValidationDto
 import com.jiwondev.seoul_diningtable.presenter.common.Constant.Companion.GET_VALIDATION
 import retrofit2.Response
 import retrofit2.http.GET

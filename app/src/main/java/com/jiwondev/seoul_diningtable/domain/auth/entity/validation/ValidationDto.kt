@@ -1,4 +1,4 @@
-package com.jiwondev.seoul_diningtable.domain.auth.validation.entity
+package com.jiwondev.seoul_diningtable.domain.auth.entity.validation
 
 data class ValidationDto(
     val data: Data? = null,
