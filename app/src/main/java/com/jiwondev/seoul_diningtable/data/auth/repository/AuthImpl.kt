@@ -25,6 +25,15 @@ class AuthImpl @Inject constructor(private val authApi: AuthApi) : AuthRepositor
     }
 
     override suspend fun postUserRegister(userRequest: RegisterRequest): Flow<BaseResult<RegisterDto>> {
-        TODO("Not yet implemented")
+        return flow {
+            val apiResult = authApi.postSignAndLogin(userRequest)
+
+            if(apiResult.isSuccessful) {
+                emit(BaseResult.Success(apiResult.body() ?: RegisterDto()))
+            } else {
+                // TODO : StatusCode 3XX ~ 5XX번 분기 -> 실패일경우 RegisterDto로 받아오는지 확인.
+                emit(BaseResult.Success(apiResult.body() ?: RegisterDto()))
+            }
+        }
     }
 }
