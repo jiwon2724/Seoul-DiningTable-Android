@@ -3,28 +3,10 @@
 
 
 
-// TODO 개발, 기술스택 기입.
+// TODO 개발환경, 기술스택 기입해야해!.
 // 공모전 이미지, url 등
+// IA, 기획서 첨부
 
-# 설계 - 미완 도형으로 시각화하기.
-앱 데이터 Reqeust 로직 (데이터 포털 + 우리 서버)
 
-1. 현재위치 주소 얻기 :현재 위치 가져오기. → ex) 서울시 **종로구** 000 000
-2. 우리 서버에 쿼리 요청 : `http://baseurl/000?gu=종로구`
-3. Response로 해당 자치구의 모든 시장 or 마트이름 받아옴.
-4. 데이터 포털에 쿼리 
-    - http://openapi.seoul.go.kr:8088/466e6457616a6977313033706b795253/json/ListNecessariesPricesService/1/1000/**얻어온 시장 or 마트이름**/ / / /**종로구**
-    - Response 데이터의 ****`list_total_count`** key 값의 1천단위 수로 페이징 처리
-    
-    
-# How?
-
-사용자들의 디바이스 스펙이 다 다르므로, 해당 디바이스 코어수 수의-1개로 스레드풀의 최대 스레드를 지정.
-
-- Dispatchers.IO가 최적화된 기능인지 확인.
-
-n개의 스레드에서 멀티 스레딩과 동시성 프로그래밍을 구현.
-
-자치구를 입력한 결과로 얻은 시장과 마트의 개수로 코루틴 생성하여 n개를 비동기처리.
-
-`awaitAll` 을 사용해서 모든 시장과 마트의 물품을 가져온 후 지도에 마커 렌더링.
+# 서울밥상 개발하면서 공부한 목록
+[테스트 코드 기본 요소와 작성 방법]([https://dev-jiwon.notion.site/StateFlow-SharedFlow-7d70c879e6714fe9a081ac470d192d28](https://dev-jiwon.notion.site/Test-Code-363a0524299e49efa90fb843fc22f8a9))
