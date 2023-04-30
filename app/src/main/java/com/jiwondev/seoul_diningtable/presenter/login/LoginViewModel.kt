@@ -18,6 +18,7 @@ class LoginViewModel @Inject constructor(
     private val validationUserCase: ValidationUseCase,
     private val userPreferenceRepository: UserPreferenceRepository
     ): ViewModel() {
+
     var type: String = "guest"
     var userEmail: String = ""
     var lastLoginSns = ""
@@ -32,7 +33,6 @@ class LoginViewModel @Inject constructor(
         this.userEmail = userEmail
 
         viewModelScope.launch {
-            Log.d("call!!! : ", "call")
             validationUserCase.getUserValidation(userEmail)
                 .onStart { setLoading() }
                 .catch { hideLoading() }
@@ -40,11 +40,7 @@ class LoginViewModel @Inject constructor(
                     hideLoading()
 
                     when(response) {
-                        is BaseResult.Success -> {
-                            hideLoading()
-                            _loginLoginUiState.value = LoginUiState.IsSuccess(response.data)
-                        }
-
+                        is BaseResult.Success -> _loginLoginUiState.value = LoginUiState.IsSuccess(response.data)
                         is BaseResult.Error -> {} // TODO : 실패시 response dto 보고 작성.
                     }
                 }
