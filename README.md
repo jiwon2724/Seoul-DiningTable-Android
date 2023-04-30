@@ -8,5 +8,9 @@
 // IA, 기획서 첨부
 
 
-# 서울밥상 개발하면서 공부한 목록
-[테스트 코드 기본 요소와 작성 방법]([https://dev-jiwon.notion.site/StateFlow-SharedFlow-7d70c879e6714fe9a081ac470d192d28](https://dev-jiwon.notion.site/Test-Code-363a0524299e49efa90fb843fc22f8a9))
+## 서울밥상 개발하면서 공부한 목록
+[테스트 코드 기본 요소와 작성 방법](https://dev-jiwon.notion.site/Test-Code-363a0524299e49efa90fb843fc22f8a9)
+
+
+
+
