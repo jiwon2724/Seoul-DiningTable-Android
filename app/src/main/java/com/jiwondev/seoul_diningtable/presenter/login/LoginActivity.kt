@@ -48,7 +48,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
                         Log.d("Current State : ", "Init")
                         when(state) {
                             is LoginUiState.Init -> Unit
-                            is LoginUiState.IsSuccess -> state.successDto.data?.let { saveUserInfo() } ?: moveSignUpActivity()
+                            is LoginUiState.IsSuccess -> state.successDto.data?.let { saveUserInfo() } ?: goToSignUpActivity()
                             is LoginUiState.IsFailed -> {} // TODO : Failed dto 받으면 넣어야해.
                             is LoginUiState.IsLoading -> handleProgressBar(state.isLoading)
                         }
@@ -179,11 +179,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
         loginViewModel.updateUserPreference(userPreference)
     }
 
-    private fun moveSignUpActivity() {
-        val intent = Intent(this, SignUpActivity::class.java)
-        intent.apply {
+    private fun goToSignUpActivity() {
+        val intent = Intent(this, SignUpActivity::class.java).apply {
             putExtra("userEmail", loginViewModel.userEmail)
             putExtra("type", loginViewModel.type)
+            putExtra("lastLoginSns", loginViewModel.lastLoginSns)
         }
         startActivity(intent)
     }
