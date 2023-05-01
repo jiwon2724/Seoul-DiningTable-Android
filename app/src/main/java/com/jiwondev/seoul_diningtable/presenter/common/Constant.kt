@@ -1,11 +1,16 @@
 package com.jiwondev.seoul_diningtable.presenter.common
 
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
+
 class Constant {
     companion object {
         const val GRANT_REQUEST_CODE = 1000 // 권한 승인 코드
 
         // api endpoint
-        const val MART = "mart"
+        const val GET_MART = "mart"
+        const val POST_LOGIN_AND_SIGN_UP = "users/insert"
+        const val GET_VALIDATION = "users/search"
 
         // store code
         const val JONGROGU = 1
@@ -33,5 +38,15 @@ class Constant {
         const val GANGNAMGU = 23
         const val SONGPAGU = 24
         const val GANGDONGU = 25
+
+        // data store
+        val AUTO_LOGIN = booleanPreferencesKey("auto_login")
+        val LAST_LOGIN_SNS = stringPreferencesKey("last_login_sns")
+        val LAST_LOGIN_TYPE = stringPreferencesKey("last_login_type")
+        val USER_EMAIL = stringPreferencesKey("user_email")
+
+        // string
+        const val OWNER = "owner"
+        const val GUEST = "guest"
     }
 }

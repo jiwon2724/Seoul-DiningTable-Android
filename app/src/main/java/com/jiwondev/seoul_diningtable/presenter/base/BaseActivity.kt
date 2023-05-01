@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.viewbinding.ViewBinding
 
@@ -17,5 +18,11 @@ abstract class BaseActivity<T : ViewBinding>(
         super.onCreate(savedInstanceState)
         _binding = bindingFactory(layoutInflater)
         setContentView(binding.root)
+
+        val window = window
+
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
     }
 }

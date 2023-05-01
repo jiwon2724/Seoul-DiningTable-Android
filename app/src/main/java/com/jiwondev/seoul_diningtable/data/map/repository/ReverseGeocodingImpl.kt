@@ -15,6 +15,7 @@ import javax.inject.Inject
 
 
 // TODO : !!(단언문) 제거하고 널처리 해야해.
+// TODO : 클래스 이름 바꿔 !
 class ReverseGeocodingImpl @Inject constructor(
     private val geocodingApi: GeocodingApi,
     private val defaultApi: DefaultApi,

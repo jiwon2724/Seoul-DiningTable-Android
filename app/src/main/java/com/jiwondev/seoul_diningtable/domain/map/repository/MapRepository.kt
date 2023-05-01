@@ -10,7 +10,6 @@ interface MapRepository {
     suspend fun getReverseGeocoding(coords: String): Flow<ReverseGeocodingDto>
     suspend fun getSearchBoroughStore(borough: Int): Flow<StoreInfoDto>
     suspend fun getStoreProductList(): Flow<StoreProductListDto>
-
 }
 
 
