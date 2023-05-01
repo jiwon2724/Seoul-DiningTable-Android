@@ -23,8 +23,8 @@ class LoginViewModel @Inject constructor(
     var userEmail: String = ""
     var lastLoginSns = ""
 
-    private val _loginLoginUiState: MutableStateFlow<LoginUiState> = MutableStateFlow(LoginUiState.Init)
-    val loginLoginUiState: StateFlow<LoginUiState> = _loginLoginUiState.asStateFlow()
+    private val _loginUiState: MutableStateFlow<LoginUiState> = MutableStateFlow(LoginUiState.Init)
+    val loginUiState: StateFlow<LoginUiState> = _loginUiState.asStateFlow()
 
     val userPreferenceFlow: Flow<UserPreference>
         get() = userPreferenceRepository.userPreferencesFlow
@@ -39,7 +39,7 @@ class LoginViewModel @Inject constructor(
                     hideLoading()
 
                     when(response) {
-                        is BaseResult.Success -> _loginLoginUiState.value = LoginUiState.IsSuccess(response.data)
+                        is BaseResult.Success -> _loginUiState.value = LoginUiState.IsSuccess(response.data)
                         is BaseResult.Error -> {} // TODO : 실패시 response dto 보고 작성.
                     }
                 }
@@ -50,8 +50,8 @@ class LoginViewModel @Inject constructor(
         userPreferenceRepository.updateUserPreference(userPreference)
     }
 
-    private fun setLoading() { _loginLoginUiState.value = LoginUiState.IsLoading(true) }
-    private fun hideLoading() { _loginLoginUiState.value = LoginUiState.IsLoading(false) }
+    private fun setLoading() { _loginUiState.value = LoginUiState.IsLoading(true) }
+    private fun hideLoading() { _loginUiState.value = LoginUiState.IsLoading(false) }
 }
 
 // TODO : State 공통으로 사용하는 부분 생각.

@@ -2,8 +2,13 @@ package com.jiwondev.seoul_diningtable.presenter.signup
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.jiwondev.seoul_diningtable.R
+import com.jiwondev.seoul_diningtable.data.user.model.UserPreference
 import com.jiwondev.seoul_diningtable.databinding.ActivitySignUpBinding
 import com.jiwondev.seoul_diningtable.presenter.base.BaseActivity
 import com.jiwondev.seoul_diningtable.presenter.common.Constant.Companion.OWNER
@@ -12,6 +17,9 @@ import com.jiwondev.seoul_diningtable.presenter.common.extensions.visible
 import com.jiwondev.seoul_diningtable.presenter.common.toast
 import com.jiwondev.seoul_diningtable.presenter.map.MapActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectIndexed
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>({ActivitySignUpBinding.inflate(it)}) {
@@ -27,7 +35,26 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>({ActivitySignUpBindin
     }
 
     private fun observe() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    signUpViewModel.signUpUiState.collect { state ->
+                        when(state) {
+                            is SignUpUiState.Init -> Unit
+                            is SignUpUiState.IsSuccess -> saveUserInfo()
+                            is SignUpUiState.IsFailed -> toast(resources.getString(R.string.signup_failed))
+                            is SignUpUiState.IsLoading -> {}
+                        }
+                    }
+                }
 
+                launch {
+                    signUpViewModel.userPreferenceFlow.collect { preference ->
+                        if(preference.autoLogin) goToMapActivity()
+                    }
+                }
+            }
+        }
     }
 
     private fun init() {
@@ -43,7 +70,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>({ActivitySignUpBindin
         binding.signUpTextView.setOnClickListener {
             if(validate()) {
                 signUpViewModel.postRegister(binding.nicknameEditText.text.trim().toString())
-            } else toast(resources.getString(R.string.signup_failed))
+            } else toast(resources.getString(R.string.signup_validate_failed))
         }
     }
 
@@ -78,5 +105,15 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>({ActivitySignUpBindin
 
     private fun goToLoginActivity() {
         binding.signupLeftArrowButton.setOnClickListener { finish() }
+    }
+
+    private fun saveUserInfo() {
+        val userPreference = UserPreference(
+            autoLogin = true,
+            userEmail = signUpViewModel.userEmail,
+            lastLoginType = signUpViewModel.type,
+            lastLoginSns = signUpViewModel.lastLoginSns
+        )
+        signUpViewModel.updateUserPreference(userPreference)
     }
 }

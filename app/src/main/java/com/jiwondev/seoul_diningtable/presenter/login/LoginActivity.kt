@@ -44,7 +44,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
-                    loginViewModel.loginLoginUiState.collect { state ->
+                    loginViewModel.loginUiState.collect { state ->
                         Log.d("Current State : ", "Init")
                         when(state) {
                             is LoginUiState.Init -> Unit
@@ -81,6 +81,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
         }
         NaverIdLoginSDK.authenticate(this, oauthLoginCallback)
     }
+
     private fun getNaverUserInfo() {
         NidOAuthLogin().callProfileApi(object : NidProfileCallback<NidProfileResponse> {
             override fun onSuccess(result: NidProfileResponse) {
@@ -145,6 +146,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
         }
     }
 
+    // TODO : 좋은 방법 찾아야해.
     private fun changeUserTypeUi(type: String) {
         when(type) {
             "guest" -> {
