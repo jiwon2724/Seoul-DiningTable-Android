@@ -10,14 +10,3 @@ fun ViewGroup.visible() { visibility = View.VISIBLE }
 fun ViewGroup.inVisible() { visibility = View.INVISIBLE }
 
 fun EditText.isNotEmpty(): Boolean { return this.text.trim().toString().isNotEmpty() }
-
-fun CheckBox.isChecked(vararg checkBox: CheckBox): Boolean {
-    var isCheck = false
-    checkBox.forEach { it ->
-        if(it.isChecked) {
-            isCheck = true
-            return@forEach
-        }
-    }
-    return isCheck
-}

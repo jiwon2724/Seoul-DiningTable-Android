@@ -48,16 +48,24 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>({ActivitySignUpBindin
     private fun validate() : Boolean {
         return when(signUpViewModel.type) {
             OWNER -> {
+                val checkBoxIsChecked = isCheckBoxChecked()
+
+                // TODO : 좀 더 좋은방법 생각해보기.
                 val editTextIsNotEmpty = binding.nicknameEditText.isNotEmpty()
                         && binding.storeNameEditText.isNotEmpty()
                         && binding.storeNumberEditText.isNotEmpty()
 
-                val checkBoxIsChecked = binding.checkBoxAllTime.isChecked
+                if(editTextIsNotEmpty) {
+
+                }
                 false
             }
             else -> binding.nicknameEditText.isNotEmpty()
         }
     }
 
-    private fun
+    // TODO : 좀 더 좋은방법 생각해보기.
+    private fun isCheckBoxChecked(): Boolean {
+        return binding.checkBoxAllTime.isChecked || binding.checkBox14To16.isChecked
+    }
 }
