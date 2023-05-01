@@ -82,95 +82,200 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ownerConstraintLayout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/signUpTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nicknameEditText">
 
-        <TextView
-            android:id="@+id/textView5"
-            style="@style/title3"
-            android:layout_width="wrap_content"
+
+        <ScrollView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="@string/owner_auth"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></TextView>
+            app:layout_constraintTop_toTopOf="parent">
 
-        <View
-            android:id="@+id/view2"
-            android:layout_width="0dp"
-            android:layout_height="0.5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:background="@color/gray_scale_9ca0a7"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView5"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"></View>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp">
 
-        <TextView
-            android:id="@+id/textView6"
-            style="@style/text2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="@string/store_name"
-            app:layout_constraintStart_toStartOf="@+id/textView5"
-            app:layout_constraintTop_toBottomOf="@+id/view2"></TextView>
 
-        <EditText
-            android:id="@+id/storeNameEditText"
-            style="@style/text2"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/signup_edittext_radius_8dp_bg"
-            android:elevation="1dp"
-            android:hint="@string/store_name_hint"
-            android:paddingLeft="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/textView6"></EditText>
+                <TextView
+                    android:id="@+id/textView5"
+                    style="@style/title3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/owner_auth"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></TextView>
 
-        <TextView
-            android:id="@+id/textView7"
-            style="@style/text2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="@string/store_number"
-            app:layout_constraintStart_toStartOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/storeNameEditText"></TextView>
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="0dp"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/gray_scale_9ca0a7"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView5"
+                    app:layout_constraintTop_toBottomOf="@+id/textView5"></View>
 
-        <EditText
-            android:id="@+id/storeNumberEditText"
-            style="@style/text2"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/signup_edittext_radius_8dp_bg"
-            android:elevation="1dp"
-            android:hint="@string/store_number_hint"
-            android:paddingLeft="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/textView7"></EditText>
+                <TextView
+                    android:id="@+id/textView7"
+                    style="@style/text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/owner_auth_notification"
+                    app:layout_constraintStart_toStartOf="@+id/view2"
+                    app:layout_constraintTop_toBottomOf="@+id/view2"></TextView>
+
+                <TextView
+                    android:id="@+id/textView6"
+                    style="@style/text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/store_name"
+                    app:layout_constraintStart_toStartOf="@+id/textView5"
+                    app:layout_constraintTop_toBottomOf="@+id/textView7"></TextView>
+
+                <EditText
+                    android:id="@+id/storeNameEditText"
+                    style="@style/text2"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/signup_edittext_radius_8dp_bg"
+                    android:elevation="1dp"
+                    android:hint="@string/store_name_hint"
+                    android:paddingLeft="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView6"
+                    app:layout_constraintTop_toBottomOf="@+id/textView6"></EditText>
+
+                <TextView
+                    android:id="@+id/textView8"
+                    style="@style/text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/store_number"
+                    app:layout_constraintStart_toStartOf="@+id/textView6"
+                    app:layout_constraintTop_toBottomOf="@+id/storeNameEditText"></TextView>
+
+                <EditText
+                    android:id="@+id/storeNumberEditText"
+                    style="@style/text2"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/signup_edittext_radius_8dp_bg"
+                    android:elevation="1dp"
+                    android:hint="@string/store_number_hint"
+                    android:paddingLeft="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/textView6"
+                    app:layout_constraintTop_toBottomOf="@+id/textView8"></EditText>
+
+                <TextView
+                    android:id="@+id/textView12"
+                    style="@style/title3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/visit_sentence"
+                    app:layout_constraintEnd_toEndOf="@+id/storeNumberEditText"
+                    app:layout_constraintStart_toStartOf="@+id/storeNumberEditText"
+                    app:layout_constraintTop_toBottomOf="@+id/storeNumberEditText"></TextView>
+
+                <TextView
+                    android:id="@+id/textView13"
+                    style="@style/text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/choose_time_sentence"
+                    app:layout_constraintEnd_toEndOf="@+id/textView12"
+                    app:layout_constraintStart_toStartOf="@+id/textView12"
+                    app:layout_constraintTop_toBottomOf="@+id/textView12"></TextView>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView12"
+                    app:layout_constraintStart_toStartOf="@+id/textView12"
+                    app:layout_constraintTop_toBottomOf="@+id/textView13">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxAllTime"
+                        style="@style/text1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/choose_time_all"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/checkBox1_10_to_12"
+                        style="@style/text1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/choose_time_10_to_12"
+                        app:layout_constraintStart_toStartOf="@+id/checkBoxAllTime"
+                        app:layout_constraintTop_toBottomOf="@+id/checkBoxAllTime"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/checkBox_14_to_16"
+                        style="@style/text1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/choose_time_14_to_16"
+                        app:layout_constraintStart_toStartOf="@+id/checkBox1_10_to_12"
+                        app:layout_constraintTop_toBottomOf="@+id/checkBox1_10_to_12"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/checkBox_16_to_18"
+                        style="@style/text1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/choose_time_16_to_18"
+                        app:layout_constraintStart_toStartOf="@+id/checkBox_14_to_16"
+                        app:layout_constraintTop_toBottomOf="@+id/checkBox_14_to_16"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/checkBox_18_to_20"
+                        style="@style/text1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/choose_time_18_to_20"
+                        app:layout_constraintStart_toStartOf="@+id/checkBox_16_to_18"
+                        app:layout_constraintTop_toBottomOf="@+id/checkBox_16_to_18"></CheckBox>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <TextView
-        android:backgroundTint="@color/black"
+        android:id="@+id/signUpTextView"
         style="@style/text2"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginBottom="25dp"
         android:background="@drawable/sigunup_textview_radius_4dp_bg"
+        android:backgroundTint="@color/black"
         android:gravity="center"
         android:text="@string/register"
         android:textColor="@color/white"

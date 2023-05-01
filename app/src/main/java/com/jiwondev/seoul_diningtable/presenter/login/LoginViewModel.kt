@@ -30,13 +30,12 @@ class LoginViewModel @Inject constructor(
         get() = userPreferenceRepository.userPreferencesFlow
 
     fun getValidation(userEmail: String) {
-        this.userEmail = userEmail
-
         viewModelScope.launch {
             validationUserCase.getUserValidation(userEmail)
                 .onStart { setLoading() }
                 .catch { hideLoading() }
                 .collect { response ->
+                    this@LoginViewModel.userEmail = userEmail
                     hideLoading()
 
                     when(response) {
