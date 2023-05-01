@@ -12,8 +12,8 @@ import com.jiwondev.seoul_diningtable.data.user.model.UserPreference
 import com.jiwondev.seoul_diningtable.databinding.ActivityLoginBinding
 import com.jiwondev.seoul_diningtable.presenter.base.BaseActivity
 import com.jiwondev.seoul_diningtable.presenter.common.toast
-import com.jiwondev.seoul_diningtable.presenter.common.gone
-import com.jiwondev.seoul_diningtable.presenter.common.visible
+import com.jiwondev.seoul_diningtable.presenter.common.extensions.gone
+import com.jiwondev.seoul_diningtable.presenter.common.extensions.visible
 import com.jiwondev.seoul_diningtable.presenter.map.MapActivity
 import com.jiwondev.seoul_diningtable.presenter.signup.SignUpActivity
 import com.kakao.sdk.auth.model.OAuthToken
@@ -144,6 +144,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
             changeUserTypeUi(loginViewModel.type)
         }
     }
+
     private fun changeUserTypeUi(type: String) {
         when(type) {
             "guest" -> {
@@ -160,12 +161,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
             }
         }
     }
+
     private fun handleProgressBar(boolean : Boolean) {
         when(boolean) {
             true -> binding.loginProgressBar.gone()
             false -> binding.loginProgressBar.visible()
         }
     }
+
     private fun saveUserInfo() {
         val userPreference = UserPreference(
             autoLogin = true,
@@ -175,6 +178,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ActivityLoginBinding.i
         )
         loginViewModel.updateUserPreference(userPreference)
     }
+
     private fun moveSignUpActivity() {
         val intent = Intent(this, SignUpActivity::class.java)
         intent.apply {

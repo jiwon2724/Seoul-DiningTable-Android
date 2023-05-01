@@ -39,9 +39,14 @@ class Constant {
         const val SONGPAGU = 24
         const val GANGDONGU = 25
 
+        // data store
         val AUTO_LOGIN = booleanPreferencesKey("auto_login")
         val LAST_LOGIN_SNS = stringPreferencesKey("last_login_sns")
         val LAST_LOGIN_TYPE = stringPreferencesKey("last_login_type")
         val USER_EMAIL = stringPreferencesKey("user_email")
+
+        // string
+        const val OWNER = "owner"
+        const val GUEST = "guest"
     }
 }

@@ -54,6 +54,7 @@ class LoginViewModel @Inject constructor(
     private fun hideLoading() { _loginLoginUiState.value = LoginUiState.IsLoading(false) }
 }
 
+// TODO : State 공통으로 사용하는 부분 생각.
 sealed class LoginUiState {
     object Init : LoginUiState()
     data class IsLoading(val isLoading: Boolean = false) : LoginUiState()
