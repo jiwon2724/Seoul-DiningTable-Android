@@ -2,6 +2,7 @@ package com.jiwondev.seoul_diningtable.presenter.map
 
 import android.annotation.SuppressLint
 import android.content.Context.LOCATION_SERVICE
+import android.content.Intent
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
@@ -33,7 +34,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_map, container, false)
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,6 +42,9 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
         init()
 
+        binding.searchAroundConstraint.setOnClickListener {
+            requireActivity().startActivity(Intent(requireActivity(), SearchProductActivity::class.java))
+        }
     }
 
     private fun init() {

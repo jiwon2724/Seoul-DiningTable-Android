@@ -34,7 +34,9 @@ class MapViewModel @Inject constructor(
      * **/
 
     // TODO : StateFlow로 만들고 함수 이름 수정할 것!
-    fun test(coords: String = "126.9779692,37.566535") = viewModelScope.launch {
+
+
+    fun getBoroughStore(coords: String = "126.9779692,37.566535") = viewModelScope.launch {
         geocodingUseCase.convertCoordinate(coords).flatMapConcat {
             val boroughCode = boroughToCode(it.results[0].region.area2.toString())
             storeSearchUseCase.getStoreInfo(boroughCode)

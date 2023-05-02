@@ -31,6 +31,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>({ActivitySplashBindin
                     when(preference.autoLogin) {
                         true -> {
                             // TODO : 로그인 연동
+                            moveActivity(MapActivity::class.java)
                         }
                         false ->  moveActivity(LoginActivity::class.java)
                     }

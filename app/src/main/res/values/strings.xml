@@ -32,4 +32,9 @@
     <string name="choose_time_18_to_20">오후 6시~8시</string>
     <string name="signup_validate_failed">회원정보를 채워주세요.</string>
     <string name="signup_failed">회원가입에 실패했습니다.</string>
+
+
+    <!--지도-->
+    <string name="map_search_hint">찾으시는 품목을 검색하세요.</string>
+    <string name="map_search_near">이 주변 검색</string>
 </resources>
