@@ -89,9 +89,13 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 launch {
                     mapViewModel.productUiState.collect { state ->
                         when(state) {
-                            is ProductUiState.IsLoading -> binding.mapProgressConstraint.visible()
+                            is ProductUiState.IsLoading ->  {
+                                Log.d("isState : ", "loading")
+                                binding.mapProgressConstraint.visible()
+                            }
                             is ProductUiState.IsSuccess -> {
                                 binding.mapProgressConstraint.gone()
+                                Log.d("product :", state.successDto.ListNecessariesPricesService?.row?.size.toString())
                             }
                             else -> Log.d("productUiState : ", "else")
                         }
