@@ -4,7 +4,7 @@ import com.jiwondev.seoul_diningtable.data.common.NetworkModule
 import com.jiwondev.seoul_diningtable.data.map.datasource.remote.api.DefaultApi
 import com.jiwondev.seoul_diningtable.data.map.datasource.remote.api.GeocodingApi
 import com.jiwondev.seoul_diningtable.data.map.datasource.remote.api.SeoulOpenApi
-import com.jiwondev.seoul_diningtable.data.map.repository.ReverseGeocodingImpl
+import com.jiwondev.seoul_diningtable.data.map.repository.MapImpl
 import com.jiwondev.seoul_diningtable.domain.map.repository.MapRepository
 import dagger.Module
 import dagger.Provides
@@ -42,6 +42,6 @@ object MapModule {
         defaultApi: DefaultApi,
         seoulApi: SeoulOpenApi
     ): MapRepository {
-        return ReverseGeocodingImpl(mapApi, defaultApi, seoulApi)
+        return MapImpl(mapApi, defaultApi, seoulApi)
     }
 }
