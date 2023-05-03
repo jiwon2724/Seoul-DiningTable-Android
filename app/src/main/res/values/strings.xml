@@ -37,4 +37,7 @@
     <!--지도-->
     <string name="map_search_hint">찾으시는 품목을 검색하세요.</string>
     <string name="map_search_near">이 주변 검색</string>
+
+    <!--검색-->
+    <string name="search_recently">최근 검색어</string>
 </resources>

@@ -12,6 +12,9 @@ class Constant {
         const val POST_LOGIN_AND_SIGN_UP = "users/insert"
         const val GET_VALIDATION = "users/search"
 
+        // seoul api endpoint
+        const val GET_PRICE_INFO = "ListNecessariesPricesService/{START_INDEX}/{END_INDEX}/{M_NAME_SCH}/{A_NAME}/{P_YEAR_MONTH}/{M_TYPE_NAME}/{M_GU_NAME}"
+
         // store code
         const val JONGROGU = 1
         const val JOONGU = 2
