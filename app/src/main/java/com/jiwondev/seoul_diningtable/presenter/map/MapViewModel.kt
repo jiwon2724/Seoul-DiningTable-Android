@@ -30,6 +30,9 @@ class MapViewModel @Inject constructor(
     private val _storeUiState: MutableStateFlow<StoreUiState> = MutableStateFlow(StoreUiState.Init)
     val storeUiState: StateFlow<StoreUiState> = _storeUiState.asStateFlow()
 
+    private var _productList = StoreProductListDto()
+    val productList: StoreProductListDto
+        get() = _productList
 
     // TODO : 위, 경도 실데이터로 바꿔야해!
     fun getBoroughStore(coords: String = "126.9779692,37.566535")  {
@@ -73,6 +76,7 @@ class MapViewModel @Inject constructor(
                     when(response) {
                         is BaseResult.Success -> {
                             _productUiState.value = ProductUiState.IsSuccess(response.data)
+                            _productList = response.data
                         }
 
                         is BaseResult.Error -> {

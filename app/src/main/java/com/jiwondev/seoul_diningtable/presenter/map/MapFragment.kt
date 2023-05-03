@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -18,6 +19,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.jiwondev.seoul_diningtable.R
 import com.jiwondev.seoul_diningtable.databinding.FragmentMapBinding
 import com.jiwondev.seoul_diningtable.presenter.base.BaseFragment
+import com.jiwondev.seoul_diningtable.presenter.common.extensions.gone
+import com.jiwondev.seoul_diningtable.presenter.common.extensions.visible
 import com.naver.maps.map.*
 import com.naver.maps.map.MapFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,7 +46,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         init()
 
         binding.searchAroundConstraint.setOnClickListener {
-            requireActivity().startActivity(Intent(requireActivity(), SearchProductActivity::class.java))
+            // requireActivity().startActivity(Intent(requireActivity(), SearchProductActivity::class.java))
+
         }
     }
 
@@ -65,18 +69,40 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         return currentLocation?.let { "${it.latitude},${it.longitude}" }?: "주소없음"
     }
 
-    private fun startFlow() {
+    private fun observe() {
+        mapViewModel.getBoroughStore()
+        mapViewModel.getProduct()
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    mapViewModel.storeUiState.collect { state ->
+                        when(state) {
+                            is StoreUiState.IsSuccess -> {
 
+                            }
+                            else -> Log.d("storeUiState : ", "else")
+                        }
+                    }
+                }
 
+                launch {
+                    mapViewModel.productUiState.collect { state ->
+                        when(state) {
+                            is ProductUiState.IsLoading -> binding.mapProgressConstraint.visible()
+                            is ProductUiState.IsSuccess -> {
+                                binding.mapProgressConstraint.gone()
+                            }
+                            else -> Log.d("productUiState : ", "else")
+                        }
+                    }
+                }
             }
         }
     }
 
 
     override fun onMapReady(p0: NaverMap) {
-        startFlow()
+        observe()
     }
 }
