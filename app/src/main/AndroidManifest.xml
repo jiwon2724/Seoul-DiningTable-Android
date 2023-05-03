@@ -26,7 +26,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".presenter.map.SearchProductActivity"
+            android:name=".presenter.map.search.SearchProductActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -47,7 +47,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".presenter.map.MapActivity"
+            android:name=".presenter.map.main.MapActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

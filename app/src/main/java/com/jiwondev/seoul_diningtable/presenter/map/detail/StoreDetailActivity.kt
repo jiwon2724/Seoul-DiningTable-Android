@@ -1,4 +1,4 @@
-package com.jiwondev.seoul_diningtable.presenter.map
+package com.jiwondev.seoul_diningtable.presenter.map.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

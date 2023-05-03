@@ -1,9 +1,7 @@
-package com.jiwondev.seoul_diningtable.presenter.map
+package com.jiwondev.seoul_diningtable.presenter.map.main
 
 import android.annotation.SuppressLint
 import android.content.Context.LOCATION_SERVICE
-import android.content.Intent
-import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
@@ -11,7 +9,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -25,7 +22,6 @@ import com.naver.maps.map.*
 import com.naver.maps.map.MapFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.collectLatest
 import java.util.*
 
 @AndroidEntryPoint

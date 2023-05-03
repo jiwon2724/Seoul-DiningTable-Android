@@ -14,7 +14,7 @@ import com.jiwondev.seoul_diningtable.presenter.base.BaseActivity
 import com.jiwondev.seoul_diningtable.presenter.common.toast
 import com.jiwondev.seoul_diningtable.presenter.common.extensions.gone
 import com.jiwondev.seoul_diningtable.presenter.common.extensions.visible
-import com.jiwondev.seoul_diningtable.presenter.map.MapActivity
+import com.jiwondev.seoul_diningtable.presenter.map.main.MapActivity
 import com.jiwondev.seoul_diningtable.presenter.signup.SignUpActivity
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError

@@ -1,4 +1,4 @@
-package com.jiwondev.seoul_diningtable.presenter.map
+package com.jiwondev.seoul_diningtable.presenter.map.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -51,7 +51,7 @@ class MapViewModel @Inject constructor(
 
                 when(response) {
                     is BaseResult.Success -> {
-                        _storeUiState.value =  StoreUiState.IsSuccess(response.data)
+                        _storeUiState.value = StoreUiState.IsSuccess(response.data)
                     }
 
                     is BaseResult.Error -> {
@@ -97,11 +97,15 @@ class MapViewModel @Inject constructor(
         }
     }
 
-    private fun setStoreLoading() { _productUiState.value = ProductUiState.IsLoading(true) }
-    private fun hideStoreLoading() { _productUiState.value = ProductUiState.IsLoading(false) }
+    private fun setStoreLoading() { _productUiState.value = ProductUiState.IsLoading(true)
+    }
+    private fun hideStoreLoading() { _productUiState.value = ProductUiState.IsLoading(false)
+    }
 
-    private fun setProductLoading() { _storeUiState.value = StoreUiState.IsLoading(true) }
-    private fun hideProductLoading() { _storeUiState.value = StoreUiState.IsLoading(false) }
+    private fun setProductLoading() { _storeUiState.value = StoreUiState.IsLoading(true)
+    }
+    private fun hideProductLoading() { _storeUiState.value = StoreUiState.IsLoading(false)
+    }
 }
 
 sealed class ProductUiState {

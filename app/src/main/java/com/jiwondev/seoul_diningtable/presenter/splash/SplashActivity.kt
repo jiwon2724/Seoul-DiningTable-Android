@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -12,8 +11,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.jiwondev.seoul_diningtable.databinding.ActivitySplashBinding
 import com.jiwondev.seoul_diningtable.presenter.base.BaseActivity
 import com.jiwondev.seoul_diningtable.presenter.login.LoginActivity
-import com.jiwondev.seoul_diningtable.presenter.map.MapActivity
-import com.jiwondev.seoul_diningtable.presenter.signup.SignUpActivity
+import com.jiwondev.seoul_diningtable.presenter.map.main.MapActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

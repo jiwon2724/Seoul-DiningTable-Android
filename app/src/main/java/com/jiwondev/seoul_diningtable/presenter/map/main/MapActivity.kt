@@ -1,4 +1,4 @@
-package com.jiwondev.seoul_diningtable.presenter.map
+package com.jiwondev.seoul_diningtable.presenter.map.main
 
 import android.content.Intent
 import android.content.pm.PackageManager
